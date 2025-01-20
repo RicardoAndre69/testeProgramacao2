@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="crud">
+<head>
+    <meta charset="UTF-8">
+    <title>Teste programação cieemg</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="angular/angular.min.js"></script>
+    <script src="angular/app.js"></script>
+</head>
+
+<body ng-controller="controller">
+<hr>
+<div class='col-sm-offset-4 col-sm-4'>
+    <h2> Agenda </h2>
+</div>
+<div class='col-sm-4'>
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Nova pessoa</button>
+</div>
+<hr>
+<div class='col-sm-offset-1 col-sm-9'>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th style="border: 0px;">ID</th>
+            <th style="border: 0px;">Nome</th>
+            <th style="border: 0px;">Contatos</th>
+            <th style="border: 0px;">Ações</th>
+        </tr>
+        </thead>
+    
+        <tbody>
+        <tr ng-repeat="cliente in getDisplayedClients()">
+            <td>{{cliente.id}}</td>
+            <td>{{cliente.nome}}</td>
+            <td>
+                {{cliente.contatos ? cliente.contatos.length : 0}} contatos
+            </td>
+            <td>
+                <button type="button" class="btn btn-warning" data-toggle="modal"
+                        data-target="#myModalEditar" ng-click="selecionaCliente(cliente)">Editar</button>
+                <button type="button" class="btn btn-danger" data-toggle="modal"
+                        data-target="#myModalExcluir" ng-click="selecionaCliente(cliente)">Excluir</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Paginação -->
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li class="page-item" ng-class="{ 'disabled': currentPage === 1 }">
+                <a class="page-link" href="#" ng-click="setPage(currentPage - 1)">Anterior</a>
+            </li>
+            <li class="page-item" ng-repeat="page in [].constructor(totalPages) track by $index">
+                <a class="page-link" href="#" ng-click="setPage($index + 1)" ng-class="{ 'active': currentPage === $index + 1 }">{{ $index + 1 }}</a>
+            </li>
+            <li class="page-item" ng-class="{ 'disabled': currentPage === totalPages }">
+                <a class="page-link" href="#" ng-click="setPage(currentPage + 1)">Próximo</a>
+            </li>
+        </ul>
+    </nav>
+
+<!-- Modal para Nova Pessoa -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Nova pessoa</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" ng-submit="salvar()">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Nome</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder=""
+                            ng-model="novoCliente.nome" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Tipo</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" ng-model="novoCliente.tipo" required>
+                                <option value="fisica">Física</option>
+                                <option value="juridica">Jurídica</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Editar Cadastro -->
+<div class="modal fade" id="myModalEditar" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Editar Cadastro</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#dadosPessoais">Dados Pessoais</a></li>
+                    <li><a data-toggle="tab" href="#contatos">Contatos</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="dadosPessoais" class="tab-pane fade in active">
+                        <form class="form-horizontal" role="form" ng-submit="alterarCliente()">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" style="color: red;">Nome</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="Nome..."
+                                    ng-model="clienteSelecionado.nome" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" style="color: red;">Tipo</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" ng-model="clienteSelecionado.tipo" required>
+                                        <option value="fisica">Física</option>
+                                        <option value="juridica">Jurídica</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-primary">Salvar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="contatos" class="tab-pane fade">
+                        <h4>Contatos Registrados</h4>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th style="border: 0px;">Contato</th>
+                                    <th style="border: 0px;">Valor</th>
+                                    <th style="border: 0px;">Tipo de Contato</th>
+                                    <th style="border: 0px;">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="contato in clienteSelecionado.contatos">
+                                    <td>{{contato.nome}}</td>
+                                    <td>{{contato.valor}}</td>
+                                    <td>{{contato.tipo}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-warning" ng-click="editarContato(contato)">Editar</button>
+                                        <button type="button" class="btn btn-danger" ng-click="excluirContato(contato)">Excluir</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="button" class="btn btn-success" ng-click="mostrarNovoContato = true">Adicionar Novo Contato</button>
+                            </div>
+                        </div>
+
+                        <!-- Campos para novo contato -->
+                        <div ng-if="mostrarNovoContato">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" style="color: red;">Contato</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" placeholder=""
+                                        ng-model="novoContato.nome" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" style="color: red;">Valor</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" placeholder=""
+                                        ng-model="novoContato.valor" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" style="color: red;">Tipo</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" ng-model="novoContato.tipo" required>
+                                            <option value="whatsapp">WhatsApp</option>
+                                            <option value="email">E-mail</option>
+                                            <option value="outro">Outro</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="button" class="btn btn-primary" ng-click="salvarNovoContato()">Salvar</button>
+                                        <button type="button" class="btn btn-default" ng-click="mostrarNovoContato = false">Cancelar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Excluir Cadastro -->
+<div class="modal fade" id="myModalExcluir" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Você tem certeza?</h4>
+            </div>
+            <div class="modal-body">
+                <h4 style="font-weight: bolder"> Você vai excluir o Cadastro de {{clienteSelecionado.nome}}</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"
+                ng-click="excluirCliente()">Sim</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
