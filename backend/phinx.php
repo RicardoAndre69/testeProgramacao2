@@ -2,8 +2,8 @@
 
 return [
     'paths' => [
-        'migrations' => 'db/migrations', // Atualize o caminho aqui
-        'seeds' => 'db/seeds',
+        'migrations' => '%%PHINX_CONFIG_DIR%%/db/migrations',
+        'seeds' => '%%PHINX_CONFIG_DIR%%/seeds',
     ],
 
     'environments' => [
@@ -13,10 +13,10 @@ return [
         'development' => [
             'adapter' => 'mysql',
             'host' => 'localhost',
-            'name' => 'your_database_name',
-            'user' => 'your_username',
-            'pass' => 'your_password',
-            'port' => 3306,
+            'name' => 'testeprogramacaophp',
+            'user' => 'root',
+            'pass' => '',
+            'port' => 3307,
             'charset' => 'utf8',
         ],
     ],

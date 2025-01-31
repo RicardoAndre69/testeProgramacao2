@@ -1,0 +1,14 @@
+paths:
+    migrations: backend/db/migrations
+environments:
+    default_migration_table: phinxlog
+    default:
+        adapter: mysql
+        host: localhost
+        name: testeprogramacaophp
+        user: root
+        pass: '' 
+        port: 3307
+        charset: utf8
+
+version_order: creation

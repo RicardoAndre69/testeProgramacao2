@@ -1,4 +1,10 @@
 {
+    "autoload": {
+        "psr-4": {
+            "Controller\\": "src/Controller/",
+            "Model\\": "src/Model/"
+        }
+    },
     "require": {
         "silex/silex": "^2.3",
         "doctrine/dbal": "^4.2",

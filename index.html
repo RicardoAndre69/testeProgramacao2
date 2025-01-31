@@ -2,12 +2,13 @@
 <html lang="pt-br" ng-app="crud">
 <head>
     <meta charset="UTF-8">
-    <title>Teste programação cieemg</title>
-    <link rel="stylesheet" type="text/css" href="bootstrap/bootstrap.css">
+    <title>Teste Programação CIEEMG</title>
+    <link rel="stylesheet" type="text/css" href="/bootstrap/bootstrap.css"> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="angular/angular.min.js"></script>
-    <script src="angular/app.js"></script>
+    <script src="/angular/angular.min.js"></script> 
+    <script src="/angular/angular-route.js"></script>
+    <script src="/angular/app.js"></script> 
 </head>
 
 <body ng-controller="controller">
@@ -33,7 +34,7 @@
         <tbody>
         <tr ng-repeat="cliente in getDisplayedClients()">
             <td>{{cliente.id}}</td>
-            <td>{{cliente.nome}}</td>
+            <td>{{cliente.nome}} <span ng-if="cliente.tipo === 'fisica'">(Físico)</span><span ng-if="cliente.tipo === 'juridica'">(Jurídica)</span></td>
             <td>
                 {{cliente.contatos ? cliente.contatos.length : 0}} contatos
             </td>
@@ -71,11 +72,11 @@
                 <h4 class="modal-title">Nova pessoa</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" role="form" ng-submit="salvar()">
+                <form class="form-horizontal" role="form" ng-submit="salvarNovoCliente()">
                     <div class="form-group">
                         <label class="control-label col-sm-2">Nome</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder=""
+                            <input type="text" class="form-control" placeholder="Digite o nome"
                             ng-model="novoCliente.nome" required>
                         </div>
                     </div>
@@ -179,11 +180,11 @@
 
                         <!-- Campos para novo contato -->
                         <div ng-if="mostrarNovoContato">
-                            <form class="form-horizontal" role="form">
+                            <form class="form-horizontal" role="form" ng-submit="salvarNovoContato()">
                                 <div class="form-group">
                                     <label class="control-label col-sm-2" style="color: red;">Contato</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder=""
+                                        <input type="text" class="form-control" placeholder="Nome do contato"
                                         ng-model="novoContato.nome" required>
                                     </div>
                                 </div>
@@ -191,7 +192,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-2" style="color: red;">Valor</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder=""
+                                        <input type="text" class="form-control" placeholder="Valor do contato"
                                         ng-model="novoContato.valor" required>
                                     </div>
                                 </div>
@@ -209,7 +210,7 @@
 
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
-                                        <button type="button" class="btn btn-primary" ng-click="salvarNovoContato()">Salvar</button>
+                                        <button type="submit" class="btn btn-primary">Salvar</button>
                                         <button type="button" class="btn btn-default" ng-click="mostrarNovoContato = false">Cancelar</button>
                                     </div>
                                 </div>

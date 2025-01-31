@@ -52,6 +52,10 @@ class ComposerStaticInit21646ee2c7dd73d01c3a4851d21416a4
             'Psr\\Cache\\' => 10,
             'Phinx\\' => 6,
         ),
+        'M' => 
+        array (
+            'Model\\' => 6,
+        ),
         'D' => 
         array (
             'Doctrine\\Deprecations\\' => 22,
@@ -59,6 +63,7 @@ class ComposerStaticInit21646ee2c7dd73d01c3a4851d21416a4
         ),
         'C' => 
         array (
+            'Controller\\' => 11,
             'Cake\\Utility\\' => 13,
             'Cake\\Datasource\\' => 16,
             'Cake\\Database\\' => 14,
@@ -171,6 +176,10 @@ class ComposerStaticInit21646ee2c7dd73d01c3a4851d21416a4
         array (
             0 => __DIR__ . '/..' . '/robmorgan/phinx/src/Phinx',
         ),
+        'Model\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Model',
+        ),
         'Doctrine\\Deprecations\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/deprecations/src',
@@ -178,6 +187,10 @@ class ComposerStaticInit21646ee2c7dd73d01c3a4851d21416a4
         'Doctrine\\DBAL\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/dbal/src',
+        ),
+        'Controller\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Controller',
         ),
         'Cake\\Utility\\' => 
         array (

@@ -3,13 +3,13 @@ namespace Model;
 
 class Client {
     private $id;
-    private $name;
-    private $type;
+    private $nome; 
+    private $tipo;
 
-    public function __construct($id, $name, $type) {
+    public function __construct($id, $nome, $tipo) { 
         $this->id = $id;
-        $this->name = $name;
-        $this->type = $type;
+        $this->nome = $nome;
+        $this->tipo = $tipo;
     }
 
     // Getters e Setters
@@ -17,11 +17,11 @@ class Client {
         return $this->id;
     }
 
-    public function getName() {
-        return $this->name;
+    public function getNome() { 
+        return $this->nome;
     }
 
-    public function getType() {
-        return $this->type;
+    public function getTipo() {
+        return $this->tipo; 
     }
 }
