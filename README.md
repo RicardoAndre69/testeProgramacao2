@@ -1,7 +1,7 @@
 # testeProgramacao2
 ## Descrição do Projeto
 
-Este projeto é uma aplicação web para gerenciamento de clientes, permitindo adicionar, editar, excluir e listar clientes. A interface é construída com AngularJS e utiliza Bootstrap para estilização. O projeto foi desenvolvido para facilitar a manipulação de dados de clientes e seus contatos, com funcionalidades de paginação para uma melhor visualização.
+Projeto full stack para gerenciamento de clientes, com as funções de adicionar, editar, excluir e listar clientes.
 
 ## Stack Utilizada
 
@@ -30,3 +30,9 @@ Este projeto é uma aplicação web para gerenciamento de clientes, permitindo a
    ```bash
    git clone https://github.com/seu-usuario/seu-repositorio.git
    cd seu-repositorio
+
+
+2. **Executar o Frontend:**
+Navegue até a pasta onde está o arquivo index.html.
+Abra o Visual Studio Code e use a extensão Live Server para abrir o arquivo index.html no navegador.
+Alternativamente, você pode clicar com o botão direito no arquivo index.html e selecionar "Open with Live Server".
