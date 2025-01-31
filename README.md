@@ -21,15 +21,12 @@ Projeto full stack para gerenciamento de clientes, com as funções de adicionar
 
 ### Pré-requisitos
 
-- Ter o [Node.js](https://nodejs.org/) instalado (opcional, se você estiver usando um backend).
-- Ter o [XAMPP](https://www.apachefriends.org/index.html) ou outro servidor local configurado (se estiver usando PHP como backend).
-
+- Ter o [Node.js](https://nodejs.org/) 
+- Ter o [XAMPP](https://www.apachefriends.org/index.html) ou outro servidor local
 ### Passos para Configuração
 
 1. **Clone o repositório**:
-   ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
-   cd seu-repositorio
+
 
 
 2. **Executar o Frontend:**
