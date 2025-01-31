@@ -2,6 +2,7 @@
 ## Descrição do Projeto
 
 Projeto full stack para gerenciamento de clientes, com as funções de adicionar, editar, excluir e listar clientes.
+backend infelizmente nao está funcionando.
 
 ## Stack Utilizada
 
